@@ -44,6 +44,12 @@ def build_pipeline(funct_list:List[Callable]) ->Callable:
         return result
     return process_data
 
+def write_partitioned(records: List[Dict]):
+    for record in records:
+        user_id = record.get('user_id')
+        event_type = record.get('event')
+        timestamp = record.get('timestamp')
+
 def trim_fields(rows: List[Dict])->List[Dict]:
     return  [{k:v.strip() if isinstance(v,str) else v for (k,v) in row.items()}
              for row in rows]    
